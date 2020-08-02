@@ -14,7 +14,7 @@ Adafruit_NeoPixel strip(NumLed, LedPin);
 IRrecv irrecv(IrPin);
 decode_results results;
 
-uint32_t white = strip.Color(255, 255, 255);
+uint32_t white = strip.Color(239, 235, 216);
 
 uint32_t red0 = strip.Color(255, 0, 0);
 uint32_t red1 = strip.Color(255, 35, 0);
@@ -24,9 +24,9 @@ uint32_t red4 = strip.Color(255, 150, 0);
 
 
 uint32_t green0 = strip.Color(0, 255, 0);
-uint32_t green1 = strip.Color(80, 255, 0);
-uint32_t green2 = strip.Color(0, 255, 0);
-uint32_t green3 = strip.Color(0, 255, 0);
+uint32_t green1 = strip.Color(0, 255, 40);
+uint32_t green2 = strip.Color(80, 255, 80);
+uint32_t green3 = strip.Color(0, 255, 80);
 uint32_t green4 = strip.Color(0, 255, 150);
 
 uint32_t blue0 = strip.Color(0, 0, 255);
@@ -122,6 +122,10 @@ void loop() {
 
       case 16214167:
       strip.fill(blue4);
+      break;
+
+      case 16244767:
+      strip.fill(white);
       break;
 
     }
