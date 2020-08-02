@@ -7,6 +7,7 @@ const int IrPin = 11;
 
 long int val;
 long int vorige;
+long int firstPixel;
 int brightness = 255;
 
 
@@ -146,24 +147,43 @@ void loop() {
     case 16240687:
     randomLed(500);
     break;
+
+    case 16246807:
+    rainbow(20);
+    break;
     
   }
 
   strip.setBrightness(brightness);
   strip.show();
 
-  delay(100);
+  delay(50);
   Serial.println(val);
 
 }
 
-void randomLed(int del) {
+void randomLed(int wait) {
 
   int led = rand() % NumLed;
   int color = rand() % 16;
 
   strip.setPixelColor(led, colorBook[color]);
 
-  delay(del);
+  delay(wait);
+  
+}
+
+void rainbow(int wait) {
+  
+  firstPixel %= 65536;
+
+  for(int i = 0; i < NumLed; i ++) {
+    int hue = firstPixel + (i * 65536L / NumLed);
+    strip.setPixelColor(i, strip.ColorHSV(hue));
+    }
+
+  firstPixel += 256;
+
+  delay(wait);
   
 }
