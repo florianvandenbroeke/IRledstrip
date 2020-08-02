@@ -29,12 +29,11 @@ uint32_t green2 = strip.Color(0, 255, 0);
 uint32_t green3 = strip.Color(0, 255, 0);
 uint32_t green4 = strip.Color(0, 255, 150);
 
-
-
-
-
 uint32_t blue0 = strip.Color(0, 0, 255);
-uint32_t blue1 = strip.Color(19, 120, 210);
+uint32_t blue1 = strip.Color(40, 0, 255);
+uint32_t blue2 = strip.Color(100, 0, 255);
+uint32_t blue3 = strip.Color(170, 0, 255);
+uint32_t blue4 = strip.Color(255, 0, 255);
 
 void setup() {
 
@@ -96,7 +95,7 @@ void loop() {
       case 16232527:
       strip.fill(green2);
       break;
-
+      
       case 16222327:
       strip.fill(green3);
       break;
@@ -112,9 +111,21 @@ void loop() {
       case 16208047:
       strip.fill(blue1);
       break;
-      
+
+      case 16216207:
+      strip.fill(blue2);
+      break;
+
+      case 16206007:
+      strip.fill(blue3);
+      break;
+
+      case 16214167:
+      strip.fill(blue4);
+      break;
+
     }
-    
+
   }
 
   strip.setBrightness(brightness);
