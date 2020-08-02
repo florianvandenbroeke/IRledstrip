@@ -6,6 +6,7 @@ const int NumLed = 10;
 const int IrPin = 11;
 
 long int val;
+long int vorige;
 int brightness = 255;
 
 
@@ -55,7 +56,11 @@ void loop() {
 
   if (irrecv.decode(&results)) {
     
+    vorige = val;
     val = results.value;
+    if (val == -1)
+    val = vorige;
+    
     irrecv.resume();
 
     if (val == 16187647 && brightness < 255) {
