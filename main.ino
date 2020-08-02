@@ -35,6 +35,10 @@ uint32_t blue2 = strip.Color(100, 0, 255);
 uint32_t blue3 = strip.Color(170, 0, 255);
 uint32_t blue4 = strip.Color(255, 0, 255);
 
+uint32_t colorBook[] = {strip.Color(239, 235, 216), strip.Color(255, 0, 0), strip.Color(255, 35, 0), strip.Color(255, 50, 0), strip.Color(255, 75, 0), 
+strip.Color(255, 150, 0), strip.Color(0, 255, 0), strip.Color(0, 255, 40), strip.Color(80, 255, 80), strip.Color(0, 255, 80), strip.Color(0, 255, 150),
+strip.Color(0, 0, 255), strip.Color(40, 0, 255), strip.Color(100, 0, 255), strip.Color(170, 0, 255), strip.Color(255, 0, 255)};
+
 void setup() {
 
   strip.begin();
@@ -132,10 +136,29 @@ void loop() {
 
   }
 
+  switch (val) {
+
+    case 16240687:
+    randomLed(500);
+    break;
+    
+  }
+
   strip.setBrightness(brightness);
   strip.show();
 
   delay(100);
   Serial.println(val);
 
+}
+
+void randomLed(int del) {
+
+  int led = rand() % NumLed;
+  int color = rand() % 16;
+
+  strip.setPixelColor(led, colorBook[color]);
+
+  delay(del);
+  
 }
