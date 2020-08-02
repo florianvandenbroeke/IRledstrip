@@ -9,6 +9,8 @@ long int val;
 long int vorige;
 long int firstPixel;
 int brightness = 255;
+int color = 1;
+int led = 0;
 
 
 Adafruit_NeoPixel strip(NumLed, LedPin);
@@ -145,11 +147,15 @@ void loop() {
   switch (val) {
 
     case 16240687:
-    randomLed(500);
+    randomLed(0);
     break;
 
     case 16246807:
     rainbow(20);
+    break;
+
+    case 16248847:
+    colorwipe(100);
     break;
     
   }
@@ -185,5 +191,23 @@ void rainbow(int wait) {
   firstPixel += 256;
 
   delay(wait);
+  
+}
+
+void colorwipe(int wait) {
+
+    color %= 16;
+
+    strip.setPixelColor(led, colorBook[color]);
+    led++;
+
+    if (led == NumLed) {
+      
+      color = rand() % 16;
+      led = 0;
+      
+      }
+
+    delay(wait);
   
 }
