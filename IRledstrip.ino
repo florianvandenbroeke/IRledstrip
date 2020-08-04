@@ -1,6 +1,7 @@
 #include <Adafruit_NeoPixel.h>;
 #include <IRremote.h>
 
+// Variable declaration
 const int LedPin = 3;
 const int NumLed = 10;
 const int IrPin = 11;
@@ -13,12 +14,13 @@ int brightness = 255;
 int color = 1;
 int led = 0;
 
-
+// Initialisation of IR receiver and ledstrip
 Adafruit_NeoPixel strip(NumLed, LedPin);
 
 IRrecv irrecv(IrPin);
 decode_results results;
 
+// Definition of preset colors
 uint32_t white = strip.Color(239, 235, 216);
 
 uint32_t red0 = strip.Color(255, 0, 0);
@@ -40,6 +42,7 @@ uint32_t blue2 = strip.Color(100, 0, 255);
 uint32_t blue3 = strip.Color(170, 0, 255);
 uint32_t blue4 = strip.Color(255, 0, 255);
 
+// array for easy acces to predefined colors
 uint32_t colorBook[] = {strip.Color(239, 235, 216), strip.Color(255, 0, 0), strip.Color(255, 35, 0), strip.Color(255, 50, 0), strip.Color(255, 75, 0), 
 strip.Color(255, 150, 0), strip.Color(0, 255, 0), strip.Color(0, 255, 40), strip.Color(80, 255, 80), strip.Color(0, 255, 80), strip.Color(0, 255, 150),
 strip.Color(0, 0, 255), strip.Color(40, 0, 255), strip.Color(100, 0, 255), strip.Color(170, 0, 255), strip.Color(255, 0, 255)};
@@ -47,7 +50,7 @@ strip.Color(0, 0, 255), strip.Color(40, 0, 255), strip.Color(100, 0, 255), strip
 void setup() {
 
   strip.begin();
-  strip.fill(white);
+  strip.fill(white); // turning on sets led strip to white
   strip.show();
 
   irrecv.enableIRIn();
@@ -59,7 +62,8 @@ void setup() {
 void loop() {
 
   if (irrecv.decode(&results)) {
-    
+
+    // store IR value, ignore repitions of the previous key (- value)
     vorige = val;
     val = results.value;
     if (val == -1)
@@ -67,6 +71,7 @@ void loop() {
     
     irrecv.resume();
 
+    // brightness controls
     if (val == 16187647 && brightness < 255) {
       brightness += 20;
     }
@@ -75,6 +80,7 @@ void loop() {
       brightness -= 20;
     }
 
+    // on/off controls
     if (val == 16203967) {
       brightness = 0;
     }
@@ -84,6 +90,7 @@ void loop() {
       brightness = 255;
     }
 
+    // static color controls
     switch(val) {
 
       case 16195807:
@@ -154,6 +161,7 @@ void loop() {
 
   }
 
+  // animation controls
   switch (val) {
 
     case 16240687:
@@ -174,14 +182,18 @@ void loop() {
     
   }
 
-  strip.setBrightness(brightness);
-  strip.show();
+  strip.setBrightness(brightness); // set brightness for each cycle
+  strip.show(); // apply color changes for each cycle
 
   delay(100);
-  Serial.println(val);
+  Serial.println(val); // serial commmunication for debugging
 
 }
 
+/* each animation function advances one "frame" in the animation when called
+ *  this enables to interrupt the animation anywhere in the cycle */
+
+// random animation: sets a random pixel to a random color of the color book
 void randomLed(int wait) {
 
   int led = rand() % NumLed;
@@ -193,6 +205,7 @@ void randomLed(int wait) {
   
 }
 
+// rainbow animation: shifts rainbow over the ledstrip
 void rainbow(int wait) {
   
   firstPixel %= 65536;
@@ -208,6 +221,7 @@ void rainbow(int wait) {
   
 }
 
+// colorwipe animation: fills ledstrip pixel per pixel with a random color
 void colorwipe(int wait) {
 
     color %= 16;
@@ -223,9 +237,10 @@ void colorwipe(int wait) {
       }
 
     delay(wait);
-  
+    
 }
 
+// fade animation: fades complete ledstrip through all colors
 void fade(int wait) {
 
   hue % 65536;
