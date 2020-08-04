@@ -74,6 +74,15 @@ void loop() {
       brightness -= 20;
     }
 
+    if (val == 16203967) {
+      brightness = 0;
+    }
+
+    if (val == 16236607) {
+      strip.fill(white);
+      brightness = 255;
+    }
+
     switch(val) {
 
       case 16195807:
