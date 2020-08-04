@@ -8,6 +8,7 @@ const int IrPin = 11;
 long int val;
 long int vorige;
 long int firstPixel;
+long int hue = 0;
 int brightness = 255;
 int color = 1;
 int led = 0;
@@ -166,13 +167,17 @@ void loop() {
     case 16248847:
     colorwipe(100);
     break;
+
+    case 16238647:
+    fade(100);
+    break;
     
   }
 
   strip.setBrightness(brightness);
   strip.show();
 
-  delay(50);
+  delay(100);
   Serial.println(val);
 
 }
@@ -218,5 +223,15 @@ void colorwipe(int wait) {
       }
 
     delay(wait);
+  
+}
+
+void fade(int wait) {
+
+  hue % 65536;
+
+  strip.fill(strip.ColorHSV(hue));
+  hue += 256;
+  delay(wait);
   
 }
