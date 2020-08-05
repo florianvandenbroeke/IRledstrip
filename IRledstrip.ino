@@ -1,5 +1,5 @@
 #include <Adafruit_NeoPixel.h>;
-#include <IRremote.h>
+#include <IRremote.h>;
 
 // Variable declaration
 const int LedPin = 3;
@@ -165,7 +165,7 @@ void loop() {
   switch (val) {
 
     case 16240687:
-    randomLed(0);
+    randomLed(50);
     break;
 
     case 16246807:
