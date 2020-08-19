@@ -1,5 +1,5 @@
-#include <Adafruit_NeoPixel.h>;
-#include <IRremote.h>;
+#include <Adafruit_NeoPixel.h>
+#include <IRremote.h>
 
 // Variable declaration
 const int LedPin = 3;
