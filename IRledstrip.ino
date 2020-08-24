@@ -3,14 +3,14 @@
 
 // Variable declaration
 const int LedPin = 3;
-const int NumLed = 10;
+const int NumLed = 137;
 const int IrPin = 11;
 
 long int val;
 long int vorige;
 long int firstPixel;
 long int hue = 0;
-int brightness = 255;
+int brightness = 150;
 int color = 1;
 int led = 0;
 
@@ -186,7 +186,7 @@ void loop() {
   strip.show(); // apply color changes for each cycle
 
   delay(100);
-  Serial.println(val); // serial commmunication for debugging
+  Serial.println(brightness); // serial commmunication for debugging
 
 }
 
