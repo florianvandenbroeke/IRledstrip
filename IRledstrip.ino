@@ -1,16 +1,17 @@
+#include <ESP8266WiFi.h>
 #include <Adafruit_NeoPixel.h>
 #include <IRremote.h>
 
 // Variable declaration
-const int LedPin = 3;
-const int NumLed = 137;
-const int IrPin = 11;
+const int LedPin = 5;
+const int NumLed = 101;
+const int IrPin = 2;
 
 long int val;
 long int vorige;
 long int firstPixel;
 long int hue = 0;
-int brightness = 150;
+int brightness = 100;
 int color = 1;
 int led = 0;
 
@@ -72,7 +73,7 @@ void loop() {
     irrecv.resume();
 
     // brightness controls
-    if (val == 16187647 && brightness < 255) {
+    if (val == 16187647 && brightness < 100) {
       brightness += 20;
     }
 
